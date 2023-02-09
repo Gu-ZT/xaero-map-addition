@@ -1,5 +1,7 @@
 # Xaero Map Addition
 
+## The project will be maintained in this repository until plusls back.
+
 ## Deps
 
 + Oh My Minecraft Client
