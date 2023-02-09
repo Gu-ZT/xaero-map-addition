@@ -3,6 +3,7 @@ description: Suggest an idea for this project.
 title: "[Feature Request] "
 labels:
   - "enhancement"
+  - "pending"
 body:
   - type: markdown
     attributes:
