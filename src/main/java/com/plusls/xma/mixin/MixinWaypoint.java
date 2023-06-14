@@ -26,7 +26,7 @@ public abstract class MixinWaypoint {
     //#if MC <= 11502
     //$$ @Shadow
     //$$ private ArrayList<RightClickOption> rightClickOptions;
-
+    //$$
     //$$ @SuppressWarnings("DuplicatedCode")
     //$$ @Inject(method = "<init>", at = @At(value = "RETURN"))
     //$$ private void addHighlightOption(

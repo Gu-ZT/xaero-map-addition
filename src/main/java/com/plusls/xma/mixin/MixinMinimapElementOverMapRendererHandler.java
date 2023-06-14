@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 //#if MC > 11502
 //#if MC > 11904
-//$$ import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphics;
 //#endif
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -40,9 +40,9 @@ public class MixinMinimapElementOverMapRendererHandler {
     @Inject(method = "render", at = @At(value = "RETURN"))
     private void postRender(
             //#if MC > 11904
-            //$$ GuiGraphics guiGraphics,
+            GuiGraphics guiGraphics,
             //#else
-            PoseStack matrixStack,
+            //$$ PoseStack matrixStack,
             //#endif
             Entity renderEntity, Player player, double renderX, double renderY,
             double renderZ, double ps, double pc, double zoom, boolean cave, float partialTicks,
@@ -54,7 +54,7 @@ public class MixinMinimapElementOverMapRendererHandler {
             return;
         }
         //#if MC > 11904
-        //$$ PoseStack matrixStack = guiGraphics.pose();
+        PoseStack matrixStack = guiGraphics.pose();
         //#endif
         matrixStack.pushPose();
         matrixStack.translate(0.0D, 0.0D, -980.0D);

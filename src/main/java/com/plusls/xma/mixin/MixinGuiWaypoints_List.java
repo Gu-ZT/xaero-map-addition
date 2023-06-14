@@ -14,7 +14,7 @@ import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
 import xaero.common.minimap.waypoints.Waypoint;
 
 //#if MC > 11904
-//$$ import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphics;
 //#endif
 
 @Dependencies(or = {@Dependency("xaerominimap"), @Dependency("xaerobetterpvp")})
@@ -23,9 +23,9 @@ public class MixinGuiWaypoints_List {
     @Inject(method = "drawWaypointSlot", at = @At(value = "RETURN"))
     private void drawHighlightWaypoint(
             //#if MC > 11904
-            //$$ GuiGraphics guiGraphics,
+            GuiGraphics guiGraphics,
             //#elseif MC > 11502
-            PoseStack matrixStack,
+            //$$ PoseStack matrixStack,
             //#endif
             Waypoint w, int x, int y, CallbackInfo ci) {
         if (!Configs.minimapHighlightWaypoint || w == null) {
@@ -35,7 +35,7 @@ public class MixinGuiWaypoints_List {
         //$$ PoseStack matrixStack = new PoseStack();
         //#endif
         //#if MC > 11904
-        //$$ PoseStack matrixStack = guiGraphics.pose();
+        PoseStack matrixStack = guiGraphics.pose();
         //#endif
 
         BlockPos pos = new BlockPos(w.getX(), w.getY(), w.getZ());

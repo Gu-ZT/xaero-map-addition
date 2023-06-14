@@ -27,7 +27,7 @@ import xaero.map.gui.dropdown.rightclick.RightClickOption;
 import java.util.ArrayList;
 
 //#if MC > 11904
-//$$ import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphics;
 //#endif
 
 @Dependencies(and = @Dependency("xaeroworldmap"))
@@ -84,9 +84,9 @@ public abstract class MixinGuiMap extends ScreenBase implements IRightClickableE
     @Inject(method = "render", at = @At(value = "RETURN"), remap = true)
     private void renderHighlightWaypoint(
             //#if MC > 11904
-            //$$ GuiGraphics guiGraphics,
+            GuiGraphics guiGraphics,
             //#elseif MC > 11502
-            PoseStack matrixStack,
+            //$$ PoseStack matrixStack,
             //#endif
             int scaledMouseX, int scaledMouseY, float partialTicks, CallbackInfo ci) {
         if (!Configs.worldMapHighlightWaypoint || HighlightWaypointUtil.highlightPos == null) {
@@ -96,7 +96,7 @@ public abstract class MixinGuiMap extends ScreenBase implements IRightClickableE
         //$$ PoseStack matrixStack = new PoseStack();
         //#endif
         //#if MC > 11904
-        //$$ PoseStack matrixStack = guiGraphics.pose();
+        PoseStack matrixStack = guiGraphics.pose();
         //#endif
 
         Minecraft mc = Minecraft.getInstance();
