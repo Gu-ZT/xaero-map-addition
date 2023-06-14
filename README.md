@@ -1,5 +1,9 @@
 # Xaero Map Addition
 
+❗Before reporting a problem, be sure to try the latest [beta version](https://github.com/plusls/xaero-map-addition/actions) to check if the problem still exists.
+
+♻️Note: Minecraft 1.20 requires the use of a third-party port [Malilib](https://github.com/Nyan-Work/malilib/releases/tag/1.20).
+
 ## Deps
 
 + Oh My Minecraft Client

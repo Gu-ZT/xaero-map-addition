@@ -4,6 +4,9 @@ import com.plusls.xma.config.Configs;
 import org.spongepowered.asm.mixin.Mixin;
 
 //#if MC > 11502
+//#if MC > 11904
+//$$ import net.minecraft.client.gui.GuiGraphics;
+//#endif
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.plusls.ommc.feature.highlithtWaypoint.HighlightWaypointUtil;
@@ -35,15 +38,24 @@ public class MixinMinimapElementOverMapRendererHandler {
 
     //#if MC > 11502
     @Inject(method = "render", at = @At(value = "RETURN"))
-    private void postRender(PoseStack matrixStack, Entity renderEntity, Player player, double renderX, double renderY,
-                            double renderZ, double ps, double pc, double zoom, boolean cave, float partialTicks,
-                            RenderTarget framebuffer, AXaeroMinimap modMain, MinimapRendererHelper helper,
-                            MultiBufferSource.BufferSource renderTypeBuffers, Font font,
-                            MultiTextureRenderTypeRendererProvider multiTextureRenderTypeRenderers, int specW, int specH,
-                            int halfViewW, int halfViewH, boolean circle, float minimapScale, CallbackInfo ci) {
+    private void postRender(
+            //#if MC > 11904
+            //$$ GuiGraphics guiGraphics,
+            //#else
+            PoseStack matrixStack,
+            //#endif
+            Entity renderEntity, Player player, double renderX, double renderY,
+            double renderZ, double ps, double pc, double zoom, boolean cave, float partialTicks,
+            RenderTarget framebuffer, AXaeroMinimap modMain, MinimapRendererHelper helper,
+            MultiBufferSource.BufferSource renderTypeBuffers, Font font,
+            MultiTextureRenderTypeRendererProvider multiTextureRenderTypeRenderers, int specW, int specH,
+            int halfViewW, int halfViewH, boolean circle, float minimapScale, CallbackInfo ci) {
         if (!Configs.minimapHighlightWaypoint || HighlightWaypointUtil.highlightPos == null) {
             return;
         }
+        //#if MC > 11904
+        //$$ PoseStack matrixStack = guiGraphics.pose();
+        //#endif
         matrixStack.pushPose();
         matrixStack.translate(0.0D, 0.0D, -980.0D);
         double offx = (double) HighlightWaypointUtil.highlightPos.getX() + 0.5D - renderX;
