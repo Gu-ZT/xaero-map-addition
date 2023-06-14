@@ -2,6 +2,10 @@
 
 ## The project will be maintained in this repository until plusls back.
 
+❗Before reporting a problem, be sure to try the latest [beta version](https://github.com/Nyan-Work/xaero-map-addition/releases) to check if the problem still exists.
+
+♻️Note: Minecraft 1.20 requires the use of a third-party port [Malilib](https://github.com/Nyan-Work/malilib/releases/tag/1.20).
+
 ## Deps
 
 + Oh My Minecraft Client
