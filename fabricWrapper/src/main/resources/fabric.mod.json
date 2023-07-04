@@ -27,7 +27,8 @@
   },
   "depends": {
     "malilib": "*",
-    "magiclib": ">=${magiclib_dependency}"
+    "magiclib": ">=${magiclib_dependency}",
+    "minecraft": ${minecraft_dependency}
   },
   "custom": {
     "modmenu:clientsideOnly": true
