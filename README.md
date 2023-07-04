@@ -2,8 +2,6 @@
 
 ❗Before reporting a problem, be sure to try the latest [beta version](https://github.com/plusls/xaero-map-addition/actions) to check if the problem still exists.
 
-♻️Note: Minecraft 1.20 requires the use of a third-party port [Malilib](https://github.com/Nyan-Work/malilib/releases/tag/1.20).
-
 ## Deps
 
 + Oh My Minecraft Client
@@ -15,7 +13,7 @@
 
 ### Chinese Translation
 
-Add Chinese translation from https://www.bilibili.com/read/cv11613668
+Add Chinese translation from https://www.bilibili.com/read/cv19539687
 
 ### Support highlight waypoint
 
