@@ -65,6 +65,7 @@ processResources {
                 "mod_name"            : project.mod_name,
                 "mod_version"         : project.version,
                 "mod_sources"         : project.mod_sources,
+                "ommc_dependency"     : project.ommc_dependency
         ])
     }
 

@@ -34,7 +34,8 @@
   "depends": {
     "malilib": "*",
     "minecraft": "${minecraft_dependency}",
-    "magiclib-${minecraft_version_id}": ">=${magiclib_dependency}"
+    "magiclib-${minecraft_version_id}": ">=${magiclib_dependency}",
+    "ommc-${minecraft_version_id}": ">=${ommc_dependency}"
   },
   "custom": {
     "modmenu:clientsideOnly": true,

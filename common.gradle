@@ -77,6 +77,7 @@ dependencies {
 
     // Misc
     runtimeOnly(project(path: ":fabricWrapper"))
+    runtimeOnly("com.github.Nyan-Work.oh-my-minecraft-client:ommc:${project.ommc_version}")
 }
 
 group(project.mod_maven_group)
@@ -203,7 +204,8 @@ processResources {
                 "mod_license"         : project.mod_license,
                 "mod_name"            : project.mod_name,
                 "mod_sources"         : project.mod_sources,
-                "mod_version"         : project.version
+                "mod_version"         : project.version,
+                "ommc_dependency"     : project.ommc_dependency,
         ])
     }
 }
