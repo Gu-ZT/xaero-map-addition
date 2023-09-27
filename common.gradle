@@ -31,8 +31,8 @@ repositories {
     }
 
     maven {
-        name("Nyan Maven")
-        url("https://maven.hendrixshen.top")
+        name("Jitpack Maven")
+        url("https://jitpack.io")
     }
 
     mavenCentral()
@@ -40,9 +40,11 @@ repositories {
 
 // Module, Property prefix, Resolve condition, Transitive dependencies.
 def apiDependencies = [
-        ["curse.maven:xaeros-world-map-317780"                                     , "xaero_world_map", true, false],
-        ["curse.maven:xaeros-minimap-263420"                                       , "xaero_minimap"  , true, false],
-        ["com.plusls.oh-my-minecraft-client:ommc-${project.name.replace(".", "_")}", "ommc"           , true, false]
+        ["curse.maven:xaeros-world-map-317780"                                               , "xaero_world_map", mcVersion < 11600, false],
+        ["maven.modrinth:xaeros-world-map"                                                   , "xaero_world_map", mcVersion > 11502, false],
+        ["curse.maven:xaeros-minimap-263420"                                                 , "xaero_minimap"  , mcVersion < 11600, false],
+        ["maven.modrinth:xaeros-minimap"                                                     , "xaero_minimap"  , mcVersion > 11502, false],
+        ["com.github.Nyan-Work.oh-my-minecraft-client:ommc-${project.name.replace(".", "_")}", "ommc"           , true             , false]
 ]
 
 dependencies {
