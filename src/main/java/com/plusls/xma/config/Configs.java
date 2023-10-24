@@ -2,7 +2,9 @@ package com.plusls.xma.config;
 
 import com.plusls.xma.ModInfo;
 import com.plusls.xma.gui.GuiConfigs;
+import com.plusls.xma.util.QuickTeleportUtil;
 import fi.dy.masa.malilib.config.options.ConfigHotkey;
+import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import net.minecraft.client.Minecraft;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.config.Configurator;
@@ -33,6 +35,12 @@ public class Configs {
             @Dependency("xaerominimap"), @Dependency("xaerobetterpvp")}))
     public static boolean minimapHighlightWaypoint = true;
 
+    @Config(category = ConfigCategory.XAERO_WORLD_MAP, dependencies = @Dependencies(and = @Dependency("xaeroworldmap")))
+    public static boolean closeMapAfterQuickTeleport;
+
+    @Hotkey(hotkey = "T")
+    @Config(category = ConfigCategory.XAERO_WORLD_MAP, dependencies = @Dependencies(and = @Dependency("xaeroworldmap")))
+    public static ConfigHotkey quickTeleport;
 
     @Config(category = ConfigCategory.XAERO_WORLD_MAP, dependencies = @Dependencies(and = @Dependency("xaeroworldmap")))
     public static boolean worldMapHighlightWaypoint = true;
@@ -49,12 +57,16 @@ public class Configs {
             return true;
         });
 
+        quickTeleport.getKeybind().setSettings(KeybindSettings.GUI);
+        quickTeleport.getKeybind().setCallback(QuickTeleportUtil::teleport);
+
         cm.setValueChangeCallback("debug", option -> {
             Configurator.setLevel(ModInfo.getModIdentifier(), debug ? Level.DEBUG : Level.INFO);
             GuiConfigs.getInstance().reDraw();
         });
+
         if (debug) {
-            Configurator.setLevel(ModInfo.getModIdentifier(), Level.toLevel("DEBUG"));
+            Configurator.setLevel(ModInfo.getModIdentifier(), Level.DEBUG);
         }
     }
 

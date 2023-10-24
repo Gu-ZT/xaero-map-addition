@@ -6,6 +6,7 @@
   "plugin": "top.hendrixshen.magiclib.dependency.impl.MagicMixinPlugin",
   "client": [
     "AccessorClientboundChatPacket",
+    "AccessorGuiMap",
     "MixinGuiMap",
     "MixinGuiWaypoints",
     "MixinGuiWaypoints_List",

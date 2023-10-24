@@ -33,7 +33,6 @@ import net.minecraft.client.gui.GuiGraphics;
 @Dependencies(and = @Dependency("xaeroworldmap"))
 @Mixin(value = GuiMap.class, remap = false)
 public abstract class MixinGuiMap extends ScreenBase implements IRightClickableElement {
-
     @Shadow
     private int rightClickX;
     @Shadow
