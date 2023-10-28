@@ -5,7 +5,7 @@ import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
 import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
 import xaero.map.mods.gui.Waypoint;
 
-//#if MC <= 11502
+//#if MC < 11600
 //$$ import com.plusls.ommc.feature.highlithtWaypoint.HighlightWaypointUtil;
 //$$ import com.plusls.xma.config.Configs;
 //$$ import net.minecraft.client.gui.screens.Screen;
@@ -36,10 +36,10 @@ public abstract class MixinWaypoint {
     //$$     if (!Configs.worldMapHighlightWaypoint) {
     //$$         return;
     //$$     }
+    //$$
     //$$     rightClickOptions.add(new RightClickOption("xaero_map_addition.gui.xaero_right_click_map_highlight_waypoint", rightClickOptions.size(), (IRightClickableElement) this) {
     //$$         public void onAction(Screen screen) {
-    //$$             HighlightWaypointUtil.highlightPos = new BlockPos(x, y, z);
-    //$$             HighlightWaypointUtil.lastBeamTime = System.currentTimeMillis() + 10000L;
+    //$$             HighlightWaypointUtil.setHighlightPos(new BlockPos(x, y, z), true);
     //$$         }
     //$$     });
     //$$ }

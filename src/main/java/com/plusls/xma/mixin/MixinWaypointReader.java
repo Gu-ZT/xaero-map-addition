@@ -49,10 +49,8 @@ public class MixinWaypointReader {
         options.add(new RightClickOption(ModInfo.getModIdentifier() + ".gui.xaero_right_click_map_highlight_waypoint",
                 options.size(), target) {
             public void onAction(Screen screen) {
-                HighlightWaypointUtil.highlightPos = new BlockPos(element.getX(),
-                        element.getY() == 32767 ? playerY : element.getY() + 1,
-                        element.getZ());
-                HighlightWaypointUtil.lastBeamTime = System.currentTimeMillis() + 10000L;
+                HighlightWaypointUtil.setHighlightPos(new BlockPos(element.getX(),
+                        element.getY() == 32767 ? playerY : element.getY() + 1, element.getZ()), true);
             }
         });
     }

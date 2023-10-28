@@ -6,6 +6,8 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.ConfirmScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import xaero.common.AXaeroMinimap;
 import xaero.common.minimap.waypoints.Waypoint;
 import xaero.common.minimap.waypoints.WaypointWorld;
@@ -43,12 +45,12 @@ public class ButtonUtil {
         }, ModInfo.translatable("gui.title.direct_delete"), ModInfo.translatable("gui.message.direct_delete")));
     }
 
-    public static Button.OnPress getHighlightButtonOnPress(Supplier<ArrayList<Waypoint>> getSelectedWaypointsList) {
+    @Contract(pure = true)
+    public static Button.@NotNull OnPress getHighlightButtonOnPress(Supplier<ArrayList<Waypoint>> getSelectedWaypointsList) {
         return buttonWidget -> {
-            if (getSelectedWaypointsList.get().size() >= 1) {
+            if (!getSelectedWaypointsList.get().isEmpty()) {
                 Waypoint w = getSelectedWaypointsList.get().get(0);
-                HighlightWaypointUtil.highlightPos = new BlockPos(w.getX(), w.getY(), w.getZ());
-                HighlightWaypointUtil.lastBeamTime = System.currentTimeMillis() + 10000L;
+                HighlightWaypointUtil.setHighlightPos(new BlockPos(w.getX(), w.getY(), w.getZ()), true);
             }
         };
     }

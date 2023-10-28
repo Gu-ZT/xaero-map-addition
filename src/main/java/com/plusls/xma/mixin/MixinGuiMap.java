@@ -10,6 +10,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -72,10 +73,9 @@ public abstract class MixinGuiMap extends ScreenBase implements IRightClickableE
         options.add(new RightClickOption(ModInfo.getModIdentifier() + ".gui.xaero_right_click_map_highlight_location",
                 options.size(), this) {
             public void onAction(Screen screen) {
-                HighlightWaypointUtil.highlightPos = new BlockPos(MixinGuiMap.this.rightClickX,
+                HighlightWaypointUtil.setHighlightPos(new BlockPos(MixinGuiMap.this.rightClickX,
                         MixinGuiMap.this.rightClickY == 32767 ? playerY : MixinGuiMap.this.rightClickY + 1,
-                        MixinGuiMap.this.rightClickZ);
-                HighlightWaypointUtil.lastBeamTime = System.currentTimeMillis() + 10000L;
+                        MixinGuiMap.this.rightClickZ), true);
             }
         });
     }
@@ -88,26 +88,36 @@ public abstract class MixinGuiMap extends ScreenBase implements IRightClickableE
             //$$ PoseStack matrixStack,
             //#endif
             int scaledMouseX, int scaledMouseY, float partialTicks, CallbackInfo ci) {
-        if (!Configs.worldMapHighlightWaypoint || HighlightWaypointUtil.highlightPos == null) {
+        if (!Configs.worldMapHighlightWaypoint) {
             return;
         }
-        //#if MC <= 11502
+
+        Minecraft mc = Minecraft.getInstance();
+        Player player = mc.player;
+
+        if (player == null) {
+            return;
+        }
+
+        BlockPos pos = HighlightWaypointUtil.getHighlightPos(player);
+
+        if (pos == null) {
+            return;
+        }
+
+        //#if MC < 11600
         //$$ PoseStack matrixStack = new PoseStack();
         //#endif
         //#if MC > 11904
         PoseStack matrixStack = guiGraphics.pose();
         //#endif
 
-        Minecraft mc = Minecraft.getInstance();
-
         matrixStack.pushPose();
-
         matrixStack.scale((float) (1.0 / this.screenScale), (float) (1.0 / this.screenScale), 1.0F);
         matrixStack.translate((double) mc.getWindow().getWidth() / 2, (double) mc.getWindow().getHeight() / 2, 0.0);
         matrixStack.scale((float) this.scale, (float) this.scale, 1.0F);
 
-        matrixStack.translate(HighlightWaypointUtil.highlightPos.getX() - this.cameraX,
-                HighlightWaypointUtil.highlightPos.getZ() - this.cameraZ, 0);
+        matrixStack.translate(pos.getX() - this.cameraX, pos.getZ() - this.cameraZ, 0);
 
         double minGuiScale = 4.0D;
         float guiBasedScale = 1.0F;

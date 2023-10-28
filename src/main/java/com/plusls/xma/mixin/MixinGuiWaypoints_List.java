@@ -4,7 +4,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.plusls.ommc.feature.highlithtWaypoint.HighlightWaypointUtil;
 import com.plusls.xma.RenderWaypointUtil;
 import com.plusls.xma.config.Configs;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -31,6 +33,13 @@ public class MixinGuiWaypoints_List {
         if (!Configs.minimapHighlightWaypoint || w == null) {
             return;
         }
+
+        Player player = Minecraft.getInstance().player;
+
+        if (player == null) {
+            return;
+        }
+
         //#if MC <= 11502
         //$$ PoseStack matrixStack = new PoseStack();
         //#endif
@@ -39,7 +48,7 @@ public class MixinGuiWaypoints_List {
         //#endif
 
         BlockPos pos = new BlockPos(w.getX(), w.getY(), w.getZ());
-        if (pos.equals(HighlightWaypointUtil.highlightPos)) {
+        if (pos.equals(HighlightWaypointUtil.getHighlightPos(player))) {
             matrixStack.pushPose();
             matrixStack.translate(x + 200, y + 7, 1.0D);
             RenderWaypointUtil.drawHighlightWaypointPTC(matrixStack.last().pose());

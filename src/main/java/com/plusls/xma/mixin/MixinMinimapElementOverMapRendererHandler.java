@@ -1,6 +1,8 @@
 package com.plusls.xma.mixin;
 
 import com.plusls.xma.config.Configs;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 
 //#if MC > 11502
@@ -50,16 +52,29 @@ public class MixinMinimapElementOverMapRendererHandler {
             MultiBufferSource.BufferSource renderTypeBuffers, Font font,
             MultiTextureRenderTypeRendererProvider multiTextureRenderTypeRenderers, int specW, int specH,
             int halfViewW, int halfViewH, boolean circle, float minimapScale, CallbackInfo ci) {
-        if (!Configs.minimapHighlightWaypoint || HighlightWaypointUtil.highlightPos == null) {
+        if (!Configs.minimapHighlightWaypoint) {
             return;
         }
+
+        Player pLayer = Minecraft.getInstance().player;
+
+        if (player == null) {
+            return;
+        }
+
+        BlockPos pos = HighlightWaypointUtil.getHighlightPos(player);
+
+        if (pos == null) {
+            return;
+        }
+
         //#if MC > 11904
         PoseStack matrixStack = guiGraphics.pose();
         //#endif
         matrixStack.pushPose();
         matrixStack.translate(0.0D, 0.0D, -980.0D);
-        double offx = (double) HighlightWaypointUtil.highlightPos.getX() + 0.5D - renderX;
-        double offz = (double) HighlightWaypointUtil.highlightPos.getZ() + 0.5D - renderZ;
+        double offx = (double) pos.getX() + 0.5D - renderX;
+        double offz = (double) pos.getZ() + 0.5D - renderZ;
 
         matrixStack.translate(0.0D, 0.0D, 0.1D);
         RenderWaypointUtil.translatePositionCompat(matrixStack, specW, specH, ps, pc, offx, offz, zoom, circle);
