@@ -37,7 +37,6 @@ import xaero.common.minimap.render.MinimapRendererHelper;
 //$$ @Mixin(Minecraft.class)
 //#endif
 public class MixinMinimapElementOverMapRendererHandler {
-
     //#if MC > 11502
     @Inject(method = "render", at = @At(value = "RETURN"))
     private void postRender(
@@ -47,7 +46,7 @@ public class MixinMinimapElementOverMapRendererHandler {
             //$$ PoseStack matrixStack,
             //#endif
             Entity renderEntity, Player player, double renderX, double renderY,
-            double renderZ, double ps, double pc, double zoom, boolean cave, float partialTicks,
+            double renderZ, double playerDimDiv, double ps, double pc, double zoom, boolean cave, float partialTicks,
             RenderTarget framebuffer, AXaeroMinimap modMain, MinimapRendererHelper helper,
             MultiBufferSource.BufferSource renderTypeBuffers, Font font,
             MultiTextureRenderTypeRendererProvider multiTextureRenderTypeRenderers, int specW, int specH,

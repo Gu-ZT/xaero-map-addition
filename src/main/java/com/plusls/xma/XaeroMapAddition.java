@@ -12,17 +12,17 @@ public class XaeroMapAddition implements ClientModInitializer {
 
     @Dependencies(and = {
             //#if MC > 11904
-            @Dependency(value = "xaerominimap", versionPredicate = ">=23.4.4", optional = true),
+            @Dependency(value = "xaerominimap", versionPredicate = ">=23.9.0", optional = true),
             @Dependency(value = "xaerobetterpvp", versionPredicate = ">=23.4.0", optional = true),
-            @Dependency(value = "xaeroworldmap", versionPredicate = ">=1.30.4", optional = true)
+            @Dependency(value = "xaeroworldmap", versionPredicate = ">=1.37.0", optional = true)
             //#elseif MC > 11902
-            //$$ @Dependency(value = "xaerominimap", versionPredicate = ">=23.1.0", optional = true),
+            //$$ @Dependency(value = "xaerominimap", versionPredicate = ">=23.9.0", optional = true),
             //$$ @Dependency(value = "xaerobetterpvp", versionPredicate = ">=22.16.4", optional = true),
-            //$$ @Dependency(value = "xaeroworldmap", versionPredicate = ">=1.28.9", optional = true)
+            //$$ @Dependency(value = "xaeroworldmap", versionPredicate = ">=1.37.0", optional = true)
             //#elseif MC > 11502
-            //$$ @Dependency(value = "xaerominimap", versionPredicate = ">=23.1.0", optional = true),
+            //$$ @Dependency(value = "xaerominimap", versionPredicate = ">=23.9.0", optional = true),
             //$$ @Dependency(value = "xaerobetterpvp", versionPredicate = ">=22.16.3", optional = true),
-            //$$ @Dependency(value = "xaeroworldmap", versionPredicate = ">=1.28.9", optional = true)
+            //$$ @Dependency(value = "xaeroworldmap", versionPredicate = ">=1.37.0", optional = true)
             //#elseif MC > 11404
             //$$ @Dependency(value = "xaerominimap", versionPredicate = ">=21.10.0.4", optional = true),
             //$$ @Dependency(value = "xaerobetterpvp", versionPredicate = ">=21.10.0.4", optional = true),
