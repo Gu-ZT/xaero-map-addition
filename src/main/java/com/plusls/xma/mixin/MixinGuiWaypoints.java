@@ -78,7 +78,7 @@ public abstract class MixinGuiWaypoints extends ScreenBase implements IDropDownW
     @Inject(method = "updateButtons", at = @At(value = "HEAD"))
     private void updateXMAButtons(CallbackInfo ci) {
         if (Configs.directDeleteButton) {
-            this.directDeleteButton.active = this.selectedListSet.size() > 0;
+            this.directDeleteButton.active = !this.selectedListSet.isEmpty();
         }
         if (Configs.minimapHighlightWaypoint) {
             this.highlightButton.active = this.selectedListSet.size() == 1;
