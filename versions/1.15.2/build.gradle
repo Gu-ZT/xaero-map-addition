@@ -75,7 +75,7 @@ dependencies {
     }
 
     // Misc
-    runtimeOnly(project(path: ":fabricWrapper"))
+//    runtimeOnly(project(path: ":fabricWrapper"))
     runtimeOnly("com.github.Nyan-Work.oh-my-minecraft-client:ommc:${project.ommc_version}")
 }
 
