@@ -1,8 +1,8 @@
 plugins {
     id("maven-publish")
-    id("fabric-loom").version("1.4-SNAPSHOT").apply(false)
-    id("org.ajoberstar.grgit").version("5.2.0")
-    id("com.replaymod.preprocess").version("SNAPSHOT")
+    id("fabric-loom").version("1.5-SNAPSHOT").apply(false)
+    id("org.ajoberstar.grgit").version("5.2.2")
+    id("com.replaymod.preprocess").version("ce1aeb2b")
 }
 
 preprocess {
@@ -19,10 +19,10 @@ preprocess {
 
     mc1152.link(mc1165, file("versions/mapping-1.15.2-1.16.5.txt"))
     mc1165.link(mc1171, null)
-    mc1171.link(mc1182, null)
+    mc1171.link(mc1182, file("versions/mapping-1.17.1-1.18.2.txt"))
     mc1182.link(mc1192, null)
     mc1192.link(mc1193, file("versions/mapping-1.19.2-1.19.3.txt"))
-    mc1193.link(mc1194, null)
+    mc1193.link(mc1194, file("versions/mapping-1.19.3-1.19.4.txt"))
     mc1194.link(mc1201, null)
     mc1201.link(mc1202, null)
     mc1202.link(mc1204, null)

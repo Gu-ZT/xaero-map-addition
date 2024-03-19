@@ -2,7 +2,6 @@ package com.plusls.xma.mixin;
 
 import com.plusls.xma.ShareWaypointUtil;
 import com.plusls.xma.config.Configs;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -11,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
 import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
+import top.hendrixshen.magiclib.util.InfoUtil;
 import xaero.common.minimap.waypoints.WaypointSharingHandler;
 
 //#if MC <= 11802
@@ -21,16 +21,17 @@ import xaero.common.minimap.waypoints.WaypointSharingHandler;
         and = @Dependency(value = "minecraft"))
 @Mixin(value = WaypointSharingHandler.class, remap = false)
 public abstract class MixinWaypointSharingHandler {
-
     @Shadow
     protected abstract String restoreFormatting(String s);
 
     @Inject(method = "onWaypointReceived", at = @At(value = "HEAD"), cancellable = true)
     private void betterOnWaypointReceived(
-            //#if MC > 11802
-            String playerName, String text,
-            //#else
-            //$$ String text, ClientboundChatPacket e,
+            //#if MC > 11701
+            String playerName,
+            //#endif
+            String text,
+            //#if MC < 11800
+            //$$ ClientboundChatPacket e,
             //#endif
             CallbackInfo ci) {
         if (!Configs.betterWaypointSharingHandler) {
@@ -51,12 +52,9 @@ public abstract class MixinWaypointSharingHandler {
         text = "<" + playerName + "> " + text;
         //#endif
         Component sendText = ShareWaypointUtil.getBetterShareText(text, args);
+
         if (sendText != null) {
-            //#if MC > 11802
-            Minecraft.getInstance().gui.getChat().addMessage(sendText);
-            //#else
-            //$$ ((AccessorClientboundChatPacket) e).setMessage(sendText);
-            //#endif
+            InfoUtil.displayChatMessage(sendText);
             ci.cancel();
         }
     }

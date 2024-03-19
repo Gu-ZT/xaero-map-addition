@@ -13,13 +13,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
 import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
-import xaero.common.AXaeroMinimap;
 import xaero.common.gui.GuiWaypoints;
 import xaero.common.gui.MyTinyButton;
 import xaero.common.gui.ScreenBase;
 import xaero.common.gui.dropdown.IDropDownWidgetCallback;
 import xaero.common.minimap.waypoints.Waypoint;
 import xaero.common.minimap.waypoints.WaypointWorld;
+import xaero.minimap.XaeroMinimap;
 
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentSkipListSet;
@@ -37,7 +37,7 @@ public abstract class MixinGuiWaypoints extends ScreenBase implements IDropDownW
     @Shadow
     private ConcurrentSkipListSet<Integer> selectedListSet;
 
-    protected MixinGuiWaypoints(AXaeroMinimap modMain, Screen parent, Screen escape, Component titleIn) {
+    protected MixinGuiWaypoints(XaeroMinimap modMain, Screen parent, Screen escape, Component titleIn) {
         super(modMain, parent, escape, titleIn);
     }
 

@@ -8,7 +8,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import xaero.common.AXaeroMinimap;
+import xaero.common.IXaeroMinimap;
 import xaero.common.minimap.waypoints.Waypoint;
 import xaero.common.minimap.waypoints.WaypointWorld;
 
@@ -22,7 +22,7 @@ public class ButtonUtil {
 
     public static Button.OnPress getDirectDeleteButtonOnPress(
             Screen guiWaypoints, WaypointWorld displayedWorld, ConcurrentSkipListSet<Integer> selectedListSet,
-            Supplier<ArrayList<Waypoint>> getSelectedWaypointsList, Runnable updateSortedList, AXaeroMinimap modMain) {
+            Supplier<ArrayList<Waypoint>> getSelectedWaypointsList, Runnable updateSortedList, IXaeroMinimap modMain) {
         return buttonWidget -> Objects.requireNonNull(Minecraft.getInstance()).setScreen(new ConfirmScreen(result -> {
             if (!result) {
                 Minecraft.getInstance().setScreen(guiWaypoints);

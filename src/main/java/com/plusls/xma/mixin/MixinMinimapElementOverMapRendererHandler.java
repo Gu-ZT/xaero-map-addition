@@ -22,10 +22,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
 import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
-import xaero.common.AXaeroMinimap;
+import xaero.common.IXaeroMinimap;
 import xaero.common.graphics.renderer.multitexture.MultiTextureRenderTypeRendererProvider;
 import xaero.common.minimap.element.render.over.MinimapElementOverMapRendererHandler;
 import xaero.common.minimap.render.MinimapRendererHelper;
+import xaero.minimap.XaeroMinimap;
 //#else
 //$$ import net.minecraft.client.Minecraft;
 //#endif
@@ -45,12 +46,31 @@ public class MixinMinimapElementOverMapRendererHandler {
             //#else
             //$$ PoseStack matrixStack,
             //#endif
-            Entity renderEntity, Player player, double renderX, double renderY,
-            double renderZ, double playerDimDiv, double ps, double pc, double zoom, boolean cave, float partialTicks,
-            RenderTarget framebuffer, AXaeroMinimap modMain, MinimapRendererHelper helper,
-            MultiBufferSource.BufferSource renderTypeBuffers, Font font,
-            MultiTextureRenderTypeRendererProvider multiTextureRenderTypeRenderers, int specW, int specH,
-            int halfViewW, int halfViewH, boolean circle, float minimapScale, CallbackInfo ci) {
+            Entity renderEntity,
+            Player player,
+            double renderX,
+            double renderY,
+            double renderZ,
+            double playerDimDiv,
+            double ps,
+            double pc,
+            double zoom,
+            boolean cave,
+            float partialTicks,
+            RenderTarget framebuffer,
+            IXaeroMinimap modMain,
+            MinimapRendererHelper helper,
+            MultiBufferSource.BufferSource renderTypeBuffers,
+            Font font,
+            MultiTextureRenderTypeRendererProvider multiTextureRenderTypeRenderers,
+            int specW,
+            int specH,
+            int halfViewW,
+            int halfViewH,
+            boolean circle,
+            float minimapScale,
+            CallbackInfo ci
+    ) {
         if (!Configs.minimapHighlightWaypoint) {
             return;
         }
