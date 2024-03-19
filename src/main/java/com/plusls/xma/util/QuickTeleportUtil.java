@@ -16,6 +16,10 @@ public class QuickTeleportUtil {
         if (!(Minecraft.getInstance().screen instanceof GuiMap)) {
             return false;
         }
+
+        if (Minecraft.getInstance().player == null) {
+            return false;
+        }
         
         GuiMap guiMap = ((GuiMap) Minecraft.getInstance().screen);
         MapDimension currentDimension = ((AccessorGuiMap) guiMap).getMapProcessor().getMapWorld().getCurrentDimension();
@@ -31,18 +35,14 @@ public class QuickTeleportUtil {
         int mouseBlockPosY = ((AccessorGuiMap) guiMap).getMouseBlockPosY();
         int mouseBlockPosZ = ((AccessorGuiMap) guiMap).getMouseBlockPosZ();
 
+        //#if MC > 11502
         // Disable teleport feature if xaero map denied or mouseBlockPos cannot get.
-        if (
-                //#if MC > 11502
-                !((AccessorGuiMap) guiMap).getMapProcessor().getMapWorld().isTeleportAllowed() ||
-                //#endif
-                        mouseBlockPosY == 32767
-        ) {
+        if (!((AccessorGuiMap) guiMap).getMapProcessor().getMapWorld().isTeleportAllowed()) {
             return false;
         }
-
-        InfoUtil.sendCommand(String.format("tp @s %s %s %s", mouseBlockPosX, Minecraft.getInstance().player == null ?
-                mouseBlockPosY : Minecraft.getInstance().player.getBlockYCompat(), mouseBlockPosZ));
+        //#endif
+        InfoUtil.sendCommand(String.format("tp @s %s %s %s", mouseBlockPosX, mouseBlockPosY == 32767 ?
+                Minecraft.getInstance().player.getBlockYCompat() : mouseBlockPosY, mouseBlockPosZ));
         Minecraft.getInstance().getSoundManager()
                 .play(SimpleSoundInstance.forUI(SoundEvents.CHORUS_FRUIT_TELEPORT, 1.0F));
 
