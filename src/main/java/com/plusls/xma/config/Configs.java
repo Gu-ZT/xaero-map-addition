@@ -14,6 +14,7 @@ import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
 import top.hendrixshen.magiclib.malilib.api.annotation.Config;
 import top.hendrixshen.magiclib.malilib.api.annotation.Hotkey;
 import top.hendrixshen.magiclib.malilib.impl.ConfigManager;
+import top.hendrixshen.magiclib.util.FabricUtil;
 
 public class Configs {
     @Config(category = ConfigCategory.GENERIC)
@@ -57,8 +58,10 @@ public class Configs {
             return true;
         });
 
-        quickTeleport.getKeybind().setSettings(KeybindSettings.GUI);
-        quickTeleport.getKeybind().setCallback(QuickTeleportUtil::teleport);
+        if (FabricUtil.isModLoaded("xaeroworldmap")) {
+            quickTeleport.getKeybind().setSettings(KeybindSettings.GUI);
+            quickTeleport.getKeybind().setCallback(QuickTeleportUtil::teleport);
+        }
 
         cm.setValueChangeCallback("debug", option -> {
             Configurator.setLevel(ModInfo.getModIdentifier(), debug ? Level.DEBUG : Level.INFO);

@@ -26,7 +26,6 @@ import xaero.common.IXaeroMinimap;
 import xaero.common.graphics.renderer.multitexture.MultiTextureRenderTypeRendererProvider;
 import xaero.common.minimap.element.render.over.MinimapElementOverMapRendererHandler;
 import xaero.common.minimap.render.MinimapRendererHelper;
-import xaero.minimap.XaeroMinimap;
 //#else
 //$$ import net.minecraft.client.Minecraft;
 //#endif
